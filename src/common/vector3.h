@@ -1,0 +1,146 @@
+#ifndef VECTOR3_H_INCLUDED
+#define VECTOR3_H_INCLUDED
+
+#include <common/modules.h>
+
+class Vector3
+{
+public:
+
+    Vector3(const Vector3& rhs) : x(rhs.x), y(rhs.y), z(rhs.z) {}
+    Vector3(void) : x(.0), y(.0), z(.0) {}
+    Vector3(double x, double y, double z) : x(x), y(y), z(z) {}
+    Vector3(double val) : x(val), y(val), z(val) {}
+    Vector3(const double val[3]) : x(val[0]), y(val[1]), z(val[2]) {}
+
+    Vector3& operator=(const Vector3& rhs) {
+        this->x = rhs.x;
+        this->y = rhs.y;
+        this->z = rhs.z;
+        return *this;
+    }
+
+    Vector3& operator=(const double& rhs) {
+        this->x = rhs;
+        this->y = rhs;
+        this->z = rhs;
+        return *this;
+    }
+
+    Vector3& operator+=(const Vector3& rhs) {
+        this->x += rhs.x;
+        this->y += rhs.y;
+        this->z += rhs.z;
+        return *this;
+    }
+
+    Vector3& operator-=(const Vector3& rhs) {
+        this->x -= rhs.x;
+        this->y -= rhs.y;
+        this->z -= rhs.z;
+        return *this;
+    }
+
+    Vector3& operator*=(const double& rhs)  {
+        this->x *= rhs;
+        this->y *= rhs;
+        this->z *= rhs;
+        return *this;
+    }
+
+    Vector3& operator/=(const double& rhs)  {
+        this->x /= rhs;
+        this->y /= rhs;
+        this->z /= rhs;
+        return *this;
+    }
+
+    Vector3 operator-() const {
+        Vector3 v;
+        v.x = -x;
+        v.y = -y;
+        v.z = -z;
+        return v;
+    }
+
+    const Vector3& operator+() const { /* provided for convenience */
+        return *this;
+    }
+
+    /* TODO: FIXME!
+    void clip(double max_val) {
+        x = clip(x, max_val);
+        y = clip(y, max_val);
+        z = clip(z, max_val);
+    }*/
+
+    double length() const { return sqrt(x*x + y*y + z*z); }
+
+    void normalize(void) {
+        const double len = length();
+        if (len == 0) return;
+        const double l = 1.0 / len;
+        x *= l;
+        y *= l;
+        z *= l;
+    }
+    double angle_phi  (void) const { return atan2(y,x); }
+    double angle_theta(void) const { return atan2(z,x); }
+
+    void random(double lower, double upper)
+    {
+        x = random_value(lower, upper);
+        y = random_value(lower, upper);
+        z = random_value(lower, upper);
+    }
+
+    void zero(void) { x = .0; y = .0; z = .0; }
+
+    bool is_zero(void) const { return (x == .0 && y == .0 && z == .0); }
+
+    Vector3 _x(void) const { return {-x, y, z}; }
+    Vector3 _y(void) const { return { x,-y, z}; }
+    Vector3 _z(void) const { return { x, y,-z}; }
+
+
+//    Vector3& operator=(Vector3 rhs) // the pass-by-value parameter serves as a temporary
+//    {
+//        rhs.swap(*this); // Non-throwing swap
+//        return *this;
+//    }
+//
+//    void swap(Vector3 &rhs) throw () // Also see non-throwing swap idiom
+//    {
+//       std::swap(this->x, rhs.x);
+//       std::swap(this->y, rhs.y);
+//       std::swap(this->z, rhs.z);
+//    }
+
+    double x, y, z;
+};
+
+inline Vector3 operator+(Vector3 lhs, Vector3 const& rhs) { lhs += rhs; return lhs; }
+inline Vector3 operator-(Vector3 lhs, Vector3 const& rhs) { lhs -= rhs; return lhs; }
+inline Vector3 operator*(Vector3 lhs, double  const& rhs) { lhs *= rhs; return lhs; }
+inline Vector3 operator*(double const& lhs,  Vector3 rhs) { rhs *= lhs; return rhs; }
+inline Vector3 operator/(Vector3 lhs,  const double& rhs) { lhs /= rhs; return lhs; }
+
+inline double operator*(const Vector3& lhs, const Vector3& rhs) { //scalar multiplication
+    return lhs.x * rhs.x
+         + lhs.y * rhs.y
+         + lhs.z * rhs.z;
+}
+inline double distance(const Vector3& lhs, const Vector3& rhs) {
+    return sqrt((lhs.x - rhs.x) * (lhs.x - rhs.x)
+              + (lhs.y - rhs.y) * (lhs.y - rhs.y)
+              + (lhs.z - rhs.z) * (lhs.z - rhs.z));
+}
+inline Vector3 clip(const Vector3& v, double max_val) {
+    Vector3 result;
+    result.x = clip(v.x, max_val);
+    result.y = clip(v.y, max_val);
+    result.z = clip(v.z, max_val);
+    return result;
+}
+
+#endif // VECTOR3_H_INCLUDED

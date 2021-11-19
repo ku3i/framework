@@ -10,7 +10,7 @@
 #include <draw/color_table.h>
 #include <common/modules.h>
 #include <common/log_messages.h>
-#include <basic/color.h>
+#include <draw/color.h>>
 
 class plot1D {
 public:

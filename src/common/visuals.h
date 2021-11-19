@@ -1,7 +1,7 @@
 #ifndef VISUALS_H_INCLUDED
 #define VISUALS_H_INCLUDED
 
-#include <basic/color.h>
+#include <draw/color.h>
 #include <GL/gl.h>
 
 namespace visuals_defaults {

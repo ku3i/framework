@@ -1,7 +1,7 @@
 #ifndef FORCEFIELD_H_INCLUDED
 #define FORCEFIELD_H_INCLUDED
 
-#include <basic/vector3.h>
+#include <common/vector3.h>
 #include <draw/axes3D.h>
 #include <draw/network3D.h>
 #include <draw/graphics.h>

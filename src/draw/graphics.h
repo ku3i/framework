@@ -2,7 +2,7 @@
 #define GRAPHICS_H_INCLUDED
 
 #include <draw/draw.h>
-#include <basic/vector3.h>
+#include <common/vector3.h>
 
 /**TODO namespace draw and rename to graphics_base */
 
