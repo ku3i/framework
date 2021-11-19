@@ -12,7 +12,7 @@
 #include <string.h>
 #include <string>
 
-#include <draw/color.h>>
+#include <draw/color.h>
 
 const GLubyte red           [] = {255,   0,   0, 255};
 const GLubyte green         [] = {  0, 255,   0, 255};

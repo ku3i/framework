@@ -1,7 +1,7 @@
 #ifndef HSV_H
 #define HSV_H
 
-#include <draw/color.h>>
+#include <draw/color.h>
 
 namespace draw {
 
