@@ -9,7 +9,7 @@
 #include <robots/joint.h>
 #include <robots/accel.h>
 #include <common/socket_client.h>
-#include <basic/vector3.h>
+#include <common/vector3.h>
 
 
 struct Body_Segment /**TODO move to separate header */

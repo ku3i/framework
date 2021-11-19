@@ -3,7 +3,7 @@
 
 #include <common/modules.h>
 #include <draw/graphics.h>
-#include <basic/color.h>
+#include <draw/color.h>>
 #include <learning/predictor.h>
 
 class Predictor_Graphics : public Graphics_Interface

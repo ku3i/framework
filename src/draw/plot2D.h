@@ -6,7 +6,7 @@
 #include <cassert>
 #include <vector>
 #include <algorithm>
-#include <basic/color.h>
+#include <draw/color.h>>
 #include <common/vector2.h>
 #include <draw/axes.h>
 #include <draw/axes3D.h>

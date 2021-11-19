@@ -24,7 +24,7 @@
 #include <common/robot_conf.h>
 #include <robots/robot.h>
 #include <robots/joint.h>
-#include <basic/vector3.h>
+#include <common/vector3.h>
 
 namespace robots {
 
