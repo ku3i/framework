@@ -160,7 +160,7 @@ public:
             err_msg(__FILE__,__LINE__,"Cannot set socket options for read timeout.\n%s", strerror(errno));
     }
 
-    void receive_message(void)
+    bool receive_message(void)
     {
         assert(rx_ready == false && "Received data not acknowledged yet.");
 
@@ -168,15 +168,16 @@ public:
         int nbytes = recvfrom(sockfd, msg, NBytes, 0, (struct sockaddr *) &addr, &addrlen);
         if (nbytes <  0) {
             wrn_msg("Receiving failed: %s", strerror(errno));
-            return;
+            return false;
         }
 
-        if (nbytes == 0) return;
+        if (nbytes == 0) return true;
 
         if (nbytes != NBytes)
             wrn_msg("Invalid message length: %u != %u.", nbytes, NBytes);
 
         rx_ready = true;
+        return true;
     }
 
     const uint8_t* get_message(void) const { return msg; }
@@ -188,22 +189,22 @@ public:
 }; /* class UDP_Receiver */
 
 
-template <unsigned N>
+template <unsigned NBytes>
 class Sendbuffer {
 	static const unsigned NumSyncBytes = 2;
 	static const uint8_t chk_init = 0xFE; /* (0xff + 0xff) % 256 */
 	uint16_t  ptr = NumSyncBytes;
-	uint8_t   buffer[N];
+	uint8_t   buffer[NBytes];
 	uint8_t   checksum = chk_init;
 public:
 	Sendbuffer()
 	{
-		static_assert(N > NumSyncBytes, "Invalid buffer size.");
+		static_assert(NBytes > NumSyncBytes, "Invalid buffer size.");
 		for (uint8_t i = 0; i < NumSyncBytes; ++i)
 			buffer[i] = 0xFF; // init sync bytes once
 	}
 	void add_byte(uint8_t byte) {
-		assertion(ptr < (N-1), "ptr=%u N=%u", ptr, N);
+		assertion(ptr < (NBytes-1), "ptr=%u N=%u", ptr, NBytes);
 		buffer[ptr++] = byte;
 		checksum += byte;
 	}
@@ -219,7 +220,7 @@ public:
 	void reset(void) { ptr = NumSyncBytes; }
 
 	void add_checksum() {
-		assertion(ptr < N, "ptr=%u N=%u", ptr, N);
+		assertion(ptr < NBytes, "ptr=%u N=%u", ptr, NBytes);
 		buffer[ptr++] = ~checksum + 1; /* two's complement checksum */
 		checksum = chk_init;
 	}
