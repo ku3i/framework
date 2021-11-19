@@ -4,7 +4,7 @@
 #include <vector>
 #include <random>
 #include <algorithm>
-#include <draw/color.h>>
+#include <draw/color.h>
 
 
 class ColorTable

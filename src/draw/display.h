@@ -5,7 +5,7 @@
 #include <limits>
 #include <draw/draw.h>
 #include <common/modules.h>
-#include <draw/color.h>>
+#include <draw/color.h>
 
 template <typename Element_t = double, typename Vector_t = std::vector<Element_t> > inline void
 draw_vector( const double posx

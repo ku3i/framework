@@ -1,8 +1,6 @@
 #ifndef COLOR_H_INCLUDED
 #define COLOR_H_INCLUDED
 
-#include <draw/drawstuff.h>
-
 struct Color4
 {
     float r, g, b, a;
@@ -19,8 +17,6 @@ struct Color4
     bool operator==(Color4 const& cmp) const {
         return (r == cmp.r && g == cmp.g && b == cmp.b && a == cmp.a);
     }
-
-    void apply() const { dsSetColorAlpha(r, g, b, a); }
 
     static Color4 set_transparency(const Color4& c, float alpha) {
         Color4 col = c;
