@@ -173,6 +173,7 @@
 		<Unit filename="src/learning/competitive_motor_layer.h" />
 		<Unit filename="src/learning/competitive_motor_layer_graphics.h" />
 		<Unit filename="src/learning/eigenzeit.h" />
+		<Unit filename="src/learning/eigenzeit_graphics.h" />
 		<Unit filename="src/learning/eligibility.h" />
 		<Unit filename="src/learning/epsilon_greedy.h" />
 		<Unit filename="src/learning/expert.h" />

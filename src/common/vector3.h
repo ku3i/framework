@@ -67,13 +67,6 @@ public:
         return *this;
     }
 
-    /* TODO: FIXME!
-    void clip(double max_val) {
-        x = clip(x, max_val);
-        y = clip(y, max_val);
-        z = clip(z, max_val);
-    }*/
-
     double length() const { return sqrt(x*x + y*y + z*z); }
 
     void normalize(void) {

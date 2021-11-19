@@ -69,7 +69,7 @@ inline void wall_contact(Particle& p)
         p.velocity.y *=  (fabs(p.velocity.y) > ff_constants::sticktion) * ff_constants::wall_damping;
         p.velocity.z *= -ff_constants::wall_decay;
     }
-    p.position.clip(1.0);
+    clip(p.position, 1.0);
 }
 
 Vector3 gravity(const Vector3& vec1, const Vector3& vec2, double g_const, double min_distance)
@@ -103,7 +103,7 @@ public:
     , particle(expert.size())
     , dt(0.001)
     , ff_axis(.0, .0, .0, 1., 1., 1., 0)
-    , ff_graph(expert.size(), ff_axis, white)
+    , ff_graph(expert.size(), ff_axis)
     {
         dbg_msg("Creating Forcefield");
     }
@@ -183,6 +183,7 @@ public:
     {
         ff_axis .draw(p.x_angle, p.y_angle);
         ff_graph.draw(p.x_angle, p.y_angle);
+        set_color(colors::white);
         glprintf(0.8, 0.7, 0.0, 0.03, "%u/%u", gmes.get_number_of_experts(), gmes.get_max_number_of_experts());
     }
 
