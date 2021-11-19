@@ -1,5 +1,5 @@
-""" 
- +----------------------------------+ 
+"""
+ +----------------------------------+
  | Framework                        |
  | Build Script                     |
  | Matthias Kubisch                 |
@@ -11,12 +11,14 @@
 
 import os
 
+Import('env')
+
 for root, dirs, files in os.walk("."):
     for file in files:
         if file.endswith(".cpp"):
              print(os.path.join(root, file))
 
-cpppaths = ['.','../../simloidTCP/src']
+cpppaths = ['.']#,'../../simloidTCP/src']
 
 
 
@@ -39,4 +41,4 @@ cxxflags = ['-std=c++11']
 
 
 
-Library('../libframework', source = src_files, CPPPATH=cpppaths, CPPFLAGS=cppflags, CXXFLAGS=cxxflags)
+env.Library('../libframework', source = src_files, CPPPATH=cpppaths, CPPFLAGS=cppflags, CXXFLAGS=cxxflags)

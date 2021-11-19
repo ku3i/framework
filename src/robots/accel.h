@@ -1,7 +1,7 @@
 #ifndef ACCEL_H_INCLUDED
 #define ACCEL_H_INCLUDED
 
-#include "../../simloidTCP/src/basic/vector3.h"
+#include <common/vector3.h>
 
 namespace robots {
 

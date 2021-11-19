@@ -1,0 +1,28 @@
+import os
+import pprint
+
+env_options = {
+    "CC"    : "arm-linux-gnueabihf-gcc",
+    "CXX"   : "arm-linux-gnueabihf-g++",
+    "LD"    : "arm-linux-gnueabihf-g++",
+    "AR"    : "arm-linux-gnueabihf-ar",
+    "STRIP" : "arm-linux-gnueabihf-strip",
+}
+
+pprint.pprint(os.environ['PATH'])
+
+env = Environment(**env_options)
+
+"""
+    This build script is assuming that your cross compiler
+    binary directory is in your PATH variable.
+    use:
+
+        export PATH=path-to-cross-compiler/bin:$PATH
+
+"""
+
+env.Append(ENV = {'PATH' : os.environ['PATH']})
+Export('env')
+
+env.SConscript('src/SConscript', variant_dir='build', duplicate=0)
